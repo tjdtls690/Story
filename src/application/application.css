@@ -1,0 +1,7 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#lo{
+	-fx-background-image:url("images/cyan.jpg")
+}
+#signUpPane{
+	-fx-background-image:url("images/cyan.jpg")
+}

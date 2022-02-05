@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>						<!-- 메인 화면 -->
+
+<BorderPane style="-fx-background-color:linear-gradient(to right, #50bcdf, #ffffff)" xmlns="http://javafx.com/javafx/8.0.171" 
+			xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientController.MainGUIController">
+   <center>
+      <TabPane prefHeight="600.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="FriendList">		<!-- 친구 목록 탭 -->
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <ListView fx:id="friendList" layoutX="-1.0" prefHeight="566.0" prefWidth="450.0" />	<!-- 친구 목록 -->
+                        								<!-- 1:1 채팅 버튼 -->
+                        <Button fx:id="btnCommunication" layoutX="359.0" layoutY="414.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" text="1:1 채팅" />
+                        <Button fx:id="addFriend" layoutX="359.0" layoutY="506.0" mnemonicParsing="false" text="친구 추가" />	<!-- 친구 추가 버튼 -->
+                        <Button fx:id="delFriend" layoutX="359.0" layoutY="460.0" mnemonicParsing="false" text="친구 삭제" />	<!-- 친구 삭제 버튼 -->
+                        								<!-- 그룹 채팅 버튼 -->
+                        <Button fx:id="btnGroup" layoutX="359.0" layoutY="370.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="81.0" text="그룹 채팅" />
+                     </children>
+               	</AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="ChattingRoom">	<!-- 채팅방 탭 -->
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>									<!-- 메세지 입력 텍스트 필드 -->
+                        <TextField fx:id="msgText" layoutX="99.0" layoutY="530.0" prefHeight="34.0" prefWidth="305.0" promptText="메세지를 입력하세요." />
+                        										<!-- 메세지 전송 버튼 -->
+                        <Button fx:id="msgButton" layoutX="403.0" layoutY="530.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="49.0" text="전송" />
+                        										<!-- 채팅방 목록 -->
+                        <ListView fx:id="roomList" layoutY="30.0" prefHeight="461.0" prefWidth="99.0" />
+                        										<!-- 대화 내용 창 -->
+                        <TextArea fx:id="communicationText" editable="false" layoutX="99.0" layoutY="30.0" prefHeight="500.0" prefWidth="351.0" />
+                        										<!-- 친구 초대 버튼 -->
+                        <Button fx:id="btnInviteFriend" layoutY="490.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="친구 초대" />
+                        										<!-- 방 나가기 버튼 -->
+                        <Button fx:id="btnRoomExit" layoutY="527.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" text="방 나가기" />
+                        <Label alignment="CENTER" layoutX="1.0" layoutY="-1.0" prefHeight="33.0" prefWidth="99.0" text="RoomList">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="97.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="6.0" />
+                        <Label alignment="CENTER" layoutX="99.0" prefHeight="29.0" prefWidth="352.0" text="Chatting">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tapMyPage" text="MyPage">		<!-- 마이페이지 탭 -->
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <Label alignment="CENTER" layoutX="87.0" layoutY="14.0" prefHeight="87.0" prefWidth="87.0" text="ID : ">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textId0" editable="false" layoutX="175.0" layoutY="35.0" prefHeight="44.0" prefWidth="174.0" />	<!-- 아이디 정보 -->
+                        <Label alignment="CENTER" layoutX="56.0" layoutY="88.0" prefHeight="87.0" prefWidth="120.0" text="이름 : ">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="56.0" layoutY="162.0" prefHeight="87.0" prefWidth="120.0" text="나이 : ">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="56.0" layoutY="241.0" prefHeight="87.0" prefWidth="120.0" text="성별 : ">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="7.0" layoutY="320.0" prefHeight="87.0" prefWidth="155.0" text="주민번호 : ">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textName0" editable="false" layoutX="175.0" layoutY="110.0" prefHeight="44.0" prefWidth="174.0" />	<!-- 이름 정보 -->
+                        <TextField fx:id="textAge0" editable="false" layoutX="175.0" layoutY="184.0" prefHeight="44.0" prefWidth="174.0" />		<!-- 나이 정보 -->
+                        <TextField fx:id="textGender0" editable="false" layoutX="175.0" layoutY="263.0" prefHeight="44.0" prefWidth="174.0" />	<!-- 성별 정보 -->
+                        <TextField fx:id="textJumin0" editable="false" layoutX="175.0" layoutY="342.0" prefHeight="44.0" prefWidth="88.0" />	<!-- 주민번호 정보 -->
+                        <TextField fx:id="textJumin01" editable="false" layoutX="315.0" layoutY="342.0" prefHeight="44.0" prefWidth="88.0" />	<!-- 주민번호 정보 -->
+                        <TextField fx:id="textTel01" layoutX="175.0" layoutY="420.0" prefHeight="44.0" prefWidth="58.0" />						<!-- 전화번호 정보 -->
+                        <TextField fx:id="textTel02" layoutX="273.0" layoutY="420.0" prefHeight="44.0" prefWidth="58.0" />						<!-- 전화번호 정보 -->
+                        <TextField fx:id="textTel03" layoutX="369.0" layoutY="420.0" prefHeight="44.0" prefWidth="58.0" />						<!-- 전화번호 정보 -->
+                        														<!-- 수정 버튼 -->
+                        <Button fx:id="btnCorrection" layoutX="97.0" layoutY="494.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="79.0" text="수정">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="7.0" layoutY="398.0" prefHeight="87.0" prefWidth="155.0" text="전화번호 : ">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                        														<!-- 탈퇴 버튼 -->
+                        <Button fx:id="btnSecession" layoutX="262.0" layoutY="494.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="79.0" text="탈퇴">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="227.0" layoutY="420.0" prefHeight="44.0" prefWidth="58.0" text="-">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="325.0" layoutY="420.0" prefHeight="44.0" prefWidth="58.0" text="-">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="264.0" layoutY="342.0" prefHeight="44.0" prefWidth="58.0" text="-">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

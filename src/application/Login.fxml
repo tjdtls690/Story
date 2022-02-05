@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>							<!-- 로그인 화면(클라의 맨 처음 화면) -->
+
+<StackPane fx:id="lo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" 
+		fx:controller="ClientController.ClientController">
+	<children>
+		<AnchorPane>
+		      <Label alignment="CENTER" layoutX="126.0" layoutY="39.0" prefHeight="142.0" prefWidth="348.0" text="Story">
+		         <font>
+		            <Font size="94.0" />
+		         </font>
+		         <textFill>
+		            <LinearGradient endX="1.0" endY="1.0" startX="0.7101449275362319" startY="0.45410628019323673">
+		               <stops>
+		                  <Stop color="#0ee3ab" />
+		                  <Stop color="WHITE" offset="1.0" />
+		               </stops>
+		            </LinearGradient>
+		         </textFill>
+		      </Label>
+		      <TextField fx:id="loginId" layoutX="245.0" layoutY="197.0" />											<!-- ID 적는 텍스트 필드 -->
+		      <Label layoutX="213.0" layoutY="197.0" prefHeight="28.0" prefWidth="30.0" text="ID : " />
+		      <Label layoutX="203.0" layoutY="251.0" prefHeight="28.0" prefWidth="40.0" text="P.W : " />
+		      <PasswordField fx:id="loginPw" layoutX="245.0" layoutY="251.0" prefHeight="28.0" prefWidth="162.0">	<!-- Password 적는 필드 -->
+		         <font>
+		            <Font name="Eras Bold ITC" size="14.0" />
+		         </font></PasswordField>
+		      <Button fx:id="btnLogin" layoutX="203.0" layoutY="320.0" prefHeight="28.0" prefWidth="68.0" text="login" />	<!-- 로그인 버튼 -->
+		      <Button fx:id="btnExit" layoutX="407.0" layoutY="320.0" prefHeight="28.0" prefWidth="68.0" text="exit" />		<!-- 나가기 버튼 -->
+		      <Button fx:id="btnSignUp" layoutX="305.0" layoutY="320.0" text="SignUp" />									<!-- 회원가입 버튼 -->
+		</AnchorPane>
+	</children>
+</StackPane>
