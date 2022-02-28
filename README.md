@@ -1,4 +1,4 @@
-# miniProject (개발 입문 2개월차 프로젝트)
+# miniProject (개발 입문 1개월 프로젝트)
 ## - nio 넌블록킹 통신 기반 채팅 프로그램<br/><br/>  
 ### == 어플리케이션 실행 방법 ==<br/><br/>
 ### 1. 관리자 서버 프로그램 시작 클래스 : src/server/controller/ServerController.java 실행
