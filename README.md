@@ -3,6 +3,7 @@
 ## - nio 넌블록킹 통신 기반 채팅 프로그램<br/><br/>
 ## - 기술 스택 : <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">&nbsp;&nbsp;<img src="https://img.shields.io/badge/javafx-00599C?style=for-the-badge&logo=java&logoColor=white">&nbsp;&nbsp;<img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
 ### 1. Mini Project 영상 자료
+#### &nbsp;&nbsp;&nbsp;- 영상을 접고싶으면 영상 상단에 있는 파일 명 탭을 눌러주시기 바랍니다.
 
 https://user-images.githubusercontent.com/85877080/161683761-584e5950-2977-4b80-9f69-95fad786844d.mp4
 
