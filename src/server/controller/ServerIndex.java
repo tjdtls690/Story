@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// 서버 시작 인덱스
 public class ServerIndex extends Application{
 
 	@Override
