@@ -5,7 +5,7 @@
 ### 1. Mini Project 영상 자료
 #### &nbsp;&nbsp;&nbsp;- 영상을 접고싶으면 영상 상단에 있는 파일 명 탭을 눌러주시기 바랍니다.
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) 서버 로그인 -> 유저 로그인 -> 서로 친구추가 -> 1:1 채팅 신청 -> 1:1 대화
-https://user-images.githubusercontent.com/85877080/161683761-584e5950-2977-4b80-9f69-95fad786844d.mp4
+https://user-images.githubusercontent.com/85877080/161698170-67902bcd-b63d-4be0-a196-a4d0c480a8b3.mp4
 
 <br/>
 
