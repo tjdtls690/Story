@@ -1,4 +1,5 @@
-# miniProject (개발 입문 1개월차 프로젝트) - 밑에 영상 2개 참고
+# miniProject (개발 입문 1개월차 프로젝트, 1인 개발, 기간 1주일) 
+# &nbsp;&nbsp;&nbsp; - 밑에 영상 2개 참고
 ## - nio 넌블록킹 통신 기반 채팅 프로그램<br/><br/>
 ## - 기술 스택 : <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">&nbsp;&nbsp;<img src="https://img.shields.io/badge/javafx-00599C?style=for-the-badge&logo=java&logoColor=white">&nbsp;&nbsp;<img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
 ### == 어플리케이션 실행 방법 ==<br/><br/>
