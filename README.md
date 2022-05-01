@@ -21,3 +21,5 @@
 </br>
 
 ## 3. 핵심 ERD
+
+![](https://tjdtls690.github.io/assets/img/github_img/important_erd_mini01.PNG)
