@@ -17,6 +17,7 @@
 #### `Front-end`
   - Java FX 
   - SceneBuilder 
+  - CSS
 
 </br>
 
