@@ -1,4 +1,4 @@
-# :pushpin: Saladit!
+# :pushpin: Story
 >NIO non-blocking 통신 기반 채팅 프로그램
 
 </br>
