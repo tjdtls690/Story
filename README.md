@@ -23,15 +23,12 @@
 
 ## 3. 핵심 ERD
 
-![](https://tjdtls690.github.io/assets/img/github_img/important_erd_mini01.PNG)
+<img src="https://tjdtls690.github.io/assets/img/github_img/important_erd_mini01.PNG"  width="800"/>
 
 ## 4. 핵심 기능
-이 서비스의 핵심 기능은 **'고객의 상품 주문 / 결제'** 와 **'관리자의 통계 시스템'** 입니다.  
+이 서비스의 핵심 기능은 **회원들간의 자유로운 방 만들기와 의사소통, 그리고 관리자의 로그 기록 시스템**입니다. 
 
-- (1) **고객**은 **상품의 주문 및 결제**를 하고, 결제한 상품에 한해서 **이미지 첨부가 가능한 리뷰를 댓글 형식으로 작성**할 수 있습니다. 
-- (2) **관리자**는 **매출 통계 표시 및 파일로 다운로드(PDF, Excel)** 가 가능하고,  **회원 관리와 쿠폰 관리 등등**이 있습니다.
-
-핵심 기능 설명을 펼쳐서 기능의 흐름을 보면, 서비스가 어떻게 동작하는지 알 수 있습니다.  
+핵심 기능 설명을 펼쳐서 기능의 흐름을 보면, 서비스가 어떻게 동작하는지 알 수 있습니다.
 
 <br/>
 
@@ -40,12 +37,70 @@
 <div markdown="1">
 
 ### 4.1. 전체 흐름
-![](https://tjdtls690.github.io/assets/img/github_img/important_flow01.PNG)
+<img src="https://tjdtls690.github.io/assets/img/github_img/important_mini_flow.PNG"  width="800"/>
 
-### 4.2. 사용자 요청 (JSP < - > Controller)
-
-- #### 회원가입
-
+### 4.2. 사용자 요청 (Client < - > Server Controller)
+  
+- #### 클라이언트에서 서버에 접속 요청 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/ClientController/ClientController.java#L58)
+  - ##### (1) 소켓채널 open 후, 5001 번 포트 접속 요청합니다.
+  <br/>
+- #### 서버에서 사용자의 요청 받기 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ClientSocket.java#L42)
+  - ##### (1) 서버소켓채널과 셀렉터 객체 생성합니다. (60행)
+  - ##### (2) non-blocking 설정 후, 클라 접속 대기상태로 전환합니다. (70 ~ 73행)
+  - ##### (3) 멀티스레드가 기다리고 있다가 셀렉트의 관심 키셋에서 작업처리 준비된 키를 가지고 와서 요청을 처리합니다. (81 ~ 142행)
+  <br/>
+- #### ClientSocket 클래스 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ClientSocket.java#L14)
+  - ##### 서버에서 각각의 클라이언트의 요청 받기와 응답, 소켓채널을 셀렉터에 등록하는 역할을 담당합니다.
+  <br/>
+- #### 프로토콜을 통해 처리할 작업(메서드)을 설정
+  - ##### (1) 서버 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L104)
+    - switch문을 통해 프로토콜을 분류하고 실행할 메서드를 지정합니다.
+  - ##### (2) 클라이언트 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/ClientController/ClientController.java#L91)
+    - 서버와 동일
+  <br/>
+- #### 데이터 전송 메서드
+  - ##### (1) 서버 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ClientSocket.java#L71)
+    - Controller의 모든 메서드에서 클라에게 응답할 시, SelectionKey 에서 클라의 요청을 받아온 해당 ClientSocket 클래스를 꺼냅니다.
+    - 해당 ClientSocket 의 보낼 메시지를 담을 변수에 프로토콜을 포함한 메시지를 담은 후 전송합니다.
+  - ##### (2) 클라이언트 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/ClientController/ClientController.java#L156)
+    - send 메서드를 통해 바로 서버에 메시지를 전송합니다.
+  <br/>
+- #### 1:1 채팅방 생성 (상대가 대화신청 수락 시) :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L433)
+  - ##### (1) 룸 객체를 생성합니다
+  - ##### (2) 접속한 모든 유저 리스트(allUserList)에서 해당 두 유저의 응답을 맡고있는 ClientSocket 두개를 꺼냅니다.
+  - ##### (3) ClientSocket 객체를 해당 룸 객체의 유저리스트에 집어넣은 후, 두 유저의 아이디와 룸 생성 성공 프로토콜을 두 유저에게 모두 응답해줍니다.
+  <br/>
+- #### 그룹 채팅방 생성 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L381)
+  - ##### (1) 초대받은 유저들 중, 한 명이라도 접속 안한 유저가 있다면 그룹 방 생성 실패 (Protocol.GROUP_NOTHING)
+  - ##### (2) 전부 접속 중이라면 그룹방 생성 성공 (Protocol.GROUPROOM_SUCCESS)
+    - (1) 룸 객체 생성
+    - (2) 접속한 모든 유저 리스트(allUserList)에서 초대받은 유저들의 ClientSocket 클래스를 꺼내서 생성한 룸 객체의 유저리스트에 넣습니다.
+    - (3) 초대받은 유저들의 아이디 목록과 룸 생성 성공 프로토콜을 메시지로 뿌립니다.
+  <br/>
+- #### 방 나가기 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L565)
+  - ##### 방 인원이 두명일 때 (if문)
+    - (1) 방에 남은 마지막 한 명 입장에서, 해당 룸 객체의 인덱스를 구하고 삭제 프로토콜과 인덱스를 메시지로 응답해줍니다.
+    - (2) 유저를 담당하는 ClientSocket 의 룸 리스트에서 해당 룸 객체를 삭제합니다.
+    - (3) 해당 룸 객체를 모든 룸 리스트에서 삭제하고 룸 안의 유저리스트도 전부 삭제합니다.
+  - ##### 방 인원이 세명 이상일 때 (else문)
+    - (1) 해당 룸에 있는 모든 유저에게 각각의 입장에서의 해당 룸 객체의 인덱스를 구합니다.
+    - (2) 나간 유저 아이디, 각 유저 입장에서의 룸 객체 인덱스, 유저 탈주 프로토콜을 룸 안의 유저들에게 데이터로 응답해줍니다.
+  <br/>
+- #### 사용자가 채팅방에서 메시지 전송 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L459)
+  - ##### 1:1 방, 그룹 방 메시지 전송 전부 커버
+  - ##### (1) 클라에서 현재 메시지를 전송한 유저가, 자신이 접속해있는 룸 리스트 중 현재 채팅중인 룸 객체의 인덱스를 데이터에 포함시켜 전송합니다.
+  - ##### (2) 서버에서 그 인덱스를 통해 해당 룸 객체를 꺼냅니다.
+  - ##### (3) 그 룸 객체 안의 접속 유저 리스트에 들어있는 유저들의 입장에서, 해당 룸 객체가, 현재 접속한 룸 객체들이 들어있는 각각의 리스트에서의 인덱스를 구합니다.
+  - ##### (4) 각 유저들에게 맞는 해당 룸 객체의 인덱스를 프로토콜, 채팅 내용과 함께 클라이언트에 응답합니다.
+  <br/>
+- #### 로그인 유효 검사 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L207)
+  - ##### (1) DB 데이터와 검사 후 아이디 또는 비번이 다르면 로그인 실패 (Protocol.LOGIN_DIF)
+  - ##### (2) 이미 접속한 아이디일때도 로그인 실패 (Protocol.LOGIN_FAIL)
+  - ##### (3) 위 두 조건을 전부 피했다면 로그인 성공 (Protocol.LOGIN_SUCCESS)
+  <br/>
+  
+### 4.3. Controller < - > Service
+  - 
 
 </div>
 </details>
