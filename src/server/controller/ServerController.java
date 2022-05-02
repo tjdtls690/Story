@@ -77,7 +77,7 @@ public class ServerController implements Initializable{
 			return;
 		}
 		
-		// 셀렉트의 관심 키셋에서 작업처리 준비된 키를 가지고 와서 처리하는 싱글 스레드
+		// 셀렉트의 관심 키셋에서 작업처리 준비된 키를 가지고 와서 처리하는 멀티 스레드
 		ExecutorService executorService = Executors.newFixedThreadPool(3); // 스레드 풀
 		Runnable runnable = new Runnable() {
 			@Override
