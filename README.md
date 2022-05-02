@@ -27,8 +27,9 @@
 
 ## 4. 핵심 기능
 이 서비스의 핵심 기능은 **회원들간의 자유로운 방 만들기와 의사소통, 그리고 관리자의 로그 기록 시스템**입니다. 
+<br/>
 
-핵심 기능 설명을 펼쳐서 기능의 흐름을 보면, 서비스가 어떻게 동작하는지 알 수 있습니다.
+**핵심 기능 설명**을 펼쳐서 기능의 흐름을 보면, 서비스가 어떻게 동작하는지 알 수 있습니다.
 
 <br/>
 
@@ -98,11 +99,106 @@
   - ##### (2) 이미 접속한 아이디일때도 로그인 실패 (Protocol.LOGIN_FAIL)
   - ##### (3) 위 두 조건을 전부 피했다면 로그인 성공 (Protocol.LOGIN_SUCCESS)
   <br/>
-  
-### 4.3. Controller < - > Service
-  - 
 
 </div>
 </details>
 
 <br/>
+  
+## 5. 핵심 트러블 슈팅
+  
+### 5.1. 각 채팅방들이 서로 영향을 주지 않게끔 구조를 짜는 문제
+
+- ### (1) 문제
+
+  - ##### 여러 유저들이 각자 다른 방에서 채팅을 할 때, 다른방에 영향을 주지 않도록 구조를 짜는 것부터 쉽지가 않았다.
+
+- ### (2) 해결
+
+  - ##### (1) 룸 객체와 유저가 서로 상호 참조를 하도록 구현했다.
+  - ##### (2) 해당 유저가 메시지를 보낼 때, 룸 객체의 인덱스를 같이 보내서 해당 룸 객체를 꺼내고
+  - ##### (3) 그 룸 객체를 이용해서, 같은 방에 있는 유저들 각자의 입장에서, 각자의 룸 리스트 안에서 룸 객체를 꺼낼 수 있도록 한다.
+  - ##### 개선된 코드 참조
+
+<details>
+<summary><b>개선된 코드</b></summary>
+<div markdown="1">
+
+  ```java
+  // 1번
+  // 룸 객체가 방에 들어온 유저들(userList)을 참조한다.
+  public class Room {
+
+    private List<ClientSocket> userList;	// 룸 객체 안에 참여한 유저 리스트
+    private StringBuffer communication;		// 대화내용 저장
+
+      // getter, setter 코드 생략
+  }
+
+
+
+  // 2번
+  // 각 유저의 소통을 담당하는 ClientSocket에서 현재 들어가있는 방(roomList)을 참조합니다.
+  public class ClientSocket {
+    private Selector selector;
+    private SocketChannel socketChannel;
+    private String sendData;
+    private List<ClientSocket> allUserList;
+    private String[] str;
+  
+    private List<Room> roomList; // 방 목록 참조
+
+    public ClientSocket(SocketChannel socketChannel, Selector selector, List<ClientSocket> allUserList) throws IOException{
+      this.allUserList = allUserList;
+      this.selector = selector;
+      this.socketChannel = socketChannel; 
+      socketChannel.configureBlocking(false);
+      SelectionKey selectionKey = socketChannel.register(selector, SelectionKey.OP_READ);
+      selectionKey.attach(this);
+      roomList = new Vector<Room>();
+    }
+
+      // 이 외의 코드 생략
+  }
+  ```
+
+</div>
+</details>
+
+</br> 
+  
+### 5.2. 프로그램을 실행만 하고 로그인은 안한 유저들이 있을 때, NullPointerException 에러 뜨는 현상
+
+- ### (1) 문제
+  - ##### 어떤 기능이 실행될 때, 유저들(ClientSocket)에 저장되어있는 id 들을 뒤져보는 경우가 많다.
+  - ##### 그 때, 프로그램은 켜놓고 로그인창에서 로그인은 안한 상태의 클라이언트가 존재하면 ClientSocket는 생성되지만 그 안의 id값은 null값이다.
+
+- ### (2) 해결
+  - ##### 유저의 정보를 뒤져보는 기능들이 실행될 때마다 밑의 코드가 실행되도록 해서 null 값인 객체는 건너뛰도록 구현했다.
+  - ##### 개선된 코드 참조
+<details>
+<summary><b>개선된 코드</b></summary>
+<div markdown="1">
+  
+  ```java
+  if(allUserList.get(i).getId() == null) continue;
+  ```
+  
+</div>
+</details>
+
+</br> 
+  
+### 5.3. 프로토콜과 메시지를 구분하는 구분자에 의한 에러
+
+- ### (1) 문제
+  - ##### 구분자가 ':' 여서 유저가 채팅을 칠 때 ':' 가 포함되는 순간 에러가 뜨는 현상이 일어났다.
+  
+- ### (2) 해결
+  - ##### 구분자를 ':' 에서 ':;:' 로 바꿨다.
+  - ##### split으로 ':;:' 를 기준으로 구분하도록 구현했다.
+  
+  ```java
+  String data = charset.decode(byteBuffer).toString();
+	str = data.split(":;:");
+  ```
