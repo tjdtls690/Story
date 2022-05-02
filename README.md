@@ -197,8 +197,14 @@
 - ### (2) 해결
   - ##### 구분자를 ':' 에서 ':;:' 로 바꿨다.
   - ##### split으로 ':;:' 를 기준으로 구분하도록 구현했다.
-  
+<details>
+<summary><b>개선된 코드</b></summary>
+<div markdown="1">
+	
   ```java
   String data = charset.decode(byteBuffer).toString();
 	str = data.split(":;:");
   ```
+
+</div>
+</details>	
