@@ -336,7 +336,6 @@ public class ServerController implements Initializable{
 				for(int j = 0; j < allRoomManager.get(i).getUserList().size(); j++) {
 					for(int k = 1; k < str.length; k++) {
 						if(allRoomManager.get(i).getUserList().get(j).getId().equals(str[k])) check++;
-						System.out.println(check);
 					} // end for
 					if(check == 2) break;
 				} // end for
@@ -471,7 +470,6 @@ public class ServerController implements Initializable{
 				str[3] += message.substring(check, message.length());
 				str[3] += "\n";
 			}
-			System.out.println("엉????    " + str[3]);
 		}
 		cl.getRoomList().get(Integer.parseInt(str[1])).setRoomMassage("[" + str[2] + "님의 메세지]\n" + str[3]);
 		String friends = "";
