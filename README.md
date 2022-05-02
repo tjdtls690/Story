@@ -38,7 +38,7 @@
 <div markdown="1">
 
 ### 4.1. 전체 흐름
-<img src="https://tjdtls690.github.io/assets/img/github_img/important_mini_flow.PNG"  width="800"/>
+<img src="https://tjdtls690.github.io/assets/img/github_img/important_mini_flow01.PNG"  width="800"/>
 
 ### 4.2. 사용자 요청 (Client < - > Server Controller)
   
