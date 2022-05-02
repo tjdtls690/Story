@@ -208,3 +208,31 @@
 
 </div>
 </details>	
+	
+<br/>
+
+## 6. 채팅 프로그램 시연 영상
+
+- ### (1) 서버 로그인 -> 유저 로그인 -> 서로 친구추가 -> 1:1 채팅 신청 -> 1:1 대화
+<details>
+<summary><b>첫번째 영상 (54초)</b></summary>
+<div markdown="1">
+
+https://user-images.githubusercontent.com/85877080/161698170-67902bcd-b63d-4be0-a196-a4d0c480a8b3.mp4
+
+</div>
+</details>
+
+<br/>
+	
+- ### (2) -> 그룹 채팅 -> 그룹채팅 및 1:1 채팅 동시 진행 -> 방 나가기 -> 서버 로그 확인 -> 서버 셧다운.
+<details>
+<summary><b>두번째 영상 (77초)</b></summary>
+<div markdown="1">
+
+https://user-images.githubusercontent.com/85877080/161700823-3050b15d-754d-4370-9df7-a1ed6f043e43.mp4
+
+</div>
+</details>
+	
+	
