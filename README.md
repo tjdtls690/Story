@@ -172,6 +172,29 @@
 - ### (1) 문제
   - ##### 어떤 기능이 실행될 때, 유저들(ClientSocket)에 저장되어있는 id 들을 뒤져보는 경우가 많다.
   - ##### 그 때, 프로그램은 켜놓고 로그인창에서 로그인은 안한 상태의 클라이언트가 존재하면 ClientSocket는 생성되지만 그 안의 id값은 null값이다.
+<details>
+<summary><b>기존 코드</b></summary>
+<div markdown="1">
+  
+  ```java
+  public static void chatRefuse(String[] str) {  // 대화 신청 거절
+  	  for(int i = 0; i < allUserList.size(); i++) {
+					      
+		  // if문에서 getId() 값이 null 값인 클라이언트 객체가 하나라도 존재한다면, NullPointerException 에러가 뜸
+		  if(allUserList.get(i).getId().equals(str[1])) {
+			  allUserList.get(i).setSendData(Protocol.CHAT_REFUSE + ":;:" + str[1] + ":;:" + str[2]);
+			  SelectionKey key = allUserList.get(i).getSocketChannel().keyFor(selector);
+			  key.interestOps(SelectionKey.OP_WRITE);
+			  break;
+		  }
+	  }
+  }
+  ```
+  
+</div>
+</details>
+
+</br> 
 
 - ### (2) 해결
   - ##### 유저의 정보를 뒤져보는 기능들이 실행될 때마다 밑의 코드가 실행되도록 해서 null 값인 객체는 건너뛰도록 구현했다.
@@ -181,7 +204,20 @@
 <div markdown="1">
   
   ```java
-  if(allUserList.get(i).getId() == null) continue;
+  public static void chatRefuse(String[] str) {  // 대화 신청 거절
+  	  for(int i = 0; i < allUserList.size(); i++) {
+					      
+		  // id가 null 값인 클라이언트 객체는 건너뛰기(continue)
+		  if(allUserList.get(i).getId() == null) continue;
+					      
+		  if(allUserList.get(i).getId().equals(str[1])) {
+			  allUserList.get(i).setSendData(Protocol.CHAT_REFUSE + ":;:" + str[1] + ":;:" + str[2]);
+			  SelectionKey key = allUserList.get(i).getSocketChannel().keyFor(selector);
+			  key.interestOps(SelectionKey.OP_WRITE);
+			  break;
+		  }
+	  }
+  }
   ```
   
 </div>
