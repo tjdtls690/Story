@@ -193,6 +193,23 @@
 
 - ### (1) 문제
   - ##### 구분자가 ':' 여서 유저가 채팅을 칠 때 ':' 가 포함되는 순간 에러가 뜨는 현상이 일어났다.
+<details>
+<summary><b>기존 코드</b></summary>
+<div markdown="1">
+	
+  ```java
+  // 1. 데이터 전송 시 형식
+  Protocol.CHAT_MESSAGE + ":" + roomListIndex + ":" + ClientController.mv.getId() + ":" + msgText.getText()
+	
+  // 2. 데이터를 받고 분류하는 형식
+  String data = charset.decode(byteBuffer).toString();
+  str = data.split(":");
+  ```
+
+</div>
+</details>	
+	
+<br/>
   
 - ### (2) 해결
   - ##### 구분자를 ':' 에서 ':;:' 로 바꿨다.
@@ -202,6 +219,10 @@
 <div markdown="1">
 	
   ```java
+  // 1. 데이터 전송 시 형식
+  Protocol.CHAT_MESSAGE + ":;:" + roomListIndex + ":;:" + ClientController.mv.getId() + ":;:" + msgText.getText()
+	
+  // 2. 데이터를 받고 분류하는 형식
   String data = charset.decode(byteBuffer).toString();
   str = data.split(":;:");
   ```
