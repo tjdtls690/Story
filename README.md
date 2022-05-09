@@ -176,10 +176,10 @@
 <summary><b>기존 코드</b></summary>
 <div markdown="1">
   
-  ```java
-  public static void chatRefuse(String[] str) {  // 대화 신청 거절
-  	for(int i = 0; i < allUserList.size(); i++) {
-					      
+```java
+public static void chatRefuse(String[] str) {  // 대화 신청 거절
+	for(int i = 0; i < allUserList.size(); i++) {
+
 		// if문에서 getId() 값이 null 값인 클라이언트 객체가 하나라도 존재한다면, NullPointerException 에러가 뜸
 		if(allUserList.get(i).getId().equals(str[1])) {
 			allUserList.get(i).setSendData(Protocol.CHAT_REFUSE + ":;:" + str[1] + ":;:" + str[2]);
@@ -187,9 +187,9 @@
 			key.interestOps(SelectionKey.OP_WRITE);
 			break;
 		}
-  	}
-  }
-  ```
+	}
+}
+```
   
 </div>
 </details>
@@ -203,8 +203,8 @@
 <summary><b>개선된 코드</b></summary>
 <div markdown="1">
   
-  ```java
-  public static void chatRefuse(String[] str) {  // 대화 신청 거절
+```java
+public static void chatRefuse(String[] str) {  // 대화 신청 거절
 	for(int i = 0; i < allUserList.size(); i++) {
 
 		// id가 null 값인 클라이언트 객체는 건너뛰기(continue)
@@ -216,9 +216,9 @@
 			key.interestOps(SelectionKey.OP_WRITE);
 			break;
 		}
-  	}
-  }
-  ```
+	}
+}
+```
   
 </div>
 </details>
