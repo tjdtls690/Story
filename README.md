@@ -203,7 +203,7 @@
 	
   ```java
   String data = charset.decode(byteBuffer).toString();
-	str = data.split(":;:");
+  str = data.split(":;:");
   ```
 
 </div>
