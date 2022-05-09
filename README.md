@@ -199,7 +199,7 @@
 	
   ```java
   // 1. 데이터 전송 시 형식
-  Protocol.CHAT_MESSAGE + ":" + roomListIndex + ":" + ClientController.mv.getId() + ":" + msgText.getText()
+  ClientController.send(Protocol.CHAT_MESSAGE + ":" + roomListIndex + ":" + ClientController.mv.getId() + ":" + msgText.getText()); 
 	
   // 2. 데이터를 받고 분류하는 형식
   String data = charset.decode(byteBuffer).toString();
@@ -220,7 +220,7 @@
 	
   ```java
   // 1. 데이터 전송 시 형식
-  Protocol.CHAT_MESSAGE + ":;:" + roomListIndex + ":;:" + ClientController.mv.getId() + ":;:" + msgText.getText()
+  ClientController.send(Protocol.CHAT_MESSAGE + ":;:" + roomListIndex + ":;:" + ClientController.mv.getId() + ":;:" + msgText.getText()); 
 	
   // 2. 데이터를 받고 분류하는 형식
   String data = charset.decode(byteBuffer).toString();
