@@ -45,7 +45,7 @@
 - #### 클라이언트에서 서버에 접속 요청 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/ClientController/ClientController.java#L58)
   - ##### (1) 소켓채널 open 후, 5001 번 포트 접속 요청합니다.
   <br/>
-- #### 서버에서 사용자의 요청 받기 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ClientSocket.java#L42)
+- #### 서버에서 사용자의 요청 받기 :pushpin: [코드 확인](https://github.com/tjdtls690/Story/blob/main/src/server/controller/ServerController.java#L60)
   - ##### (1) 서버소켓채널과 셀렉터 객체 생성합니다. (60행)
   - ##### (2) non-blocking 설정 후, 클라 접속 대기상태로 전환합니다. (70 ~ 73행)
   - ##### (3) 멀티스레드가 기다리고 있다가 셀렉트의 관심 키셋에서 작업처리 준비된 키를 가지고 와서 요청을 처리합니다. (81 ~ 142행)
